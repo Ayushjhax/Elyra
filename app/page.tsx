@@ -130,8 +130,8 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative z-10 min-h-screen flex items-center px-6 md:px-8 py-20">
-        <div className="max-w-7xl mx-auto w-full">
+      <section className="relative z-10 min-h-screen flex items-end px-6 md:px-8 pb-12 md:pb-16">
+        <div className="w-full">
           <div className="max-w-3xl">
             <h1 className="font-space-grotesk text-6xl md:text-8xl lg:text-9xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-orange-400 to-yellow-400 bg-clip-text text-transparent leading-tight">
               Horizon
