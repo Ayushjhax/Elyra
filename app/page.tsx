@@ -171,112 +171,31 @@ export default function Home() {
 
       {/* Content Section */}
       <div className="relative z-10 bg-black/95 backdrop-blur-sm">
-        {/* About Section */}
-        <section className="px-6 md:px-8 py-16 md:py-24">
-          <div className="max-w-7xl mx-auto">
-            <h2 className="font-space-grotesk text-4xl md:text-5xl font-bold mb-8 text-center">
-              Horizon
-            </h2>
-            <p className="text-lg md:text-xl text-white/80 max-w-4xl mx-auto leading-relaxed text-center font-inter">
-              Horizon harnesses AI and on-chain prediction markets to help you hedge everyday costs and global risks. Our system uses advanced NLP, time-series, and computer-vision models to scan news, economic data, and even weather patterns to forecast threats to your budget or portfolio. Horizon then automatically trades on Kalshi's regulated event markets (now tokenized on Solana via DFlow and Jupiter). Each prediction contract (e.g. "Will inflation exceed 4%?") is tokenized on Solana, so trades settle instantly and transparently on-chain. In short: Horizon brings institutional-grade hedging to both everyday users and advanced investors, by turning real-world events into automated, fully-auditable trades.
-            </p>
-          </div>
-        </section>
-
-        {/* Features Section */}
-        <section className="px-6 md:px-8 py-16 md:py-24 border-t border-white/10">
-          <div className="max-w-7xl mx-auto">
-            <h2 className="font-space-grotesk text-4xl md:text-5xl font-bold mb-12 text-center">
-              Features
-            </h2>
-
-            <div className="grid md:grid-cols-2 gap-12 mb-16">
-              {/* Everyday Users */}
-              <div>
-                <h3 className="font-space-grotesk text-2xl md:text-3xl font-bold mb-6 text-blue-400">
-                  For Everyday Users
-                </h3>
-                <div className="space-y-6">
-                  <div>
-                    <h4 className="font-semibold text-xl mb-2 font-inter">Hedge Daily Expenses</h4>
-                    <p className="text-white/70 leading-relaxed font-inter">
-                      Protect your budget by automatically locking in prices for groceries, gas, rent, etc. using simple event contracts (e.g. inflation rates, fuel prices, crop weather).
-                    </p>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-xl mb-2 font-inter">Hands-off AI Predictions</h4>
-                    <p className="text-white/70 leading-relaxed font-inter">
-                      Horizon's AI continuously monitors news, social media, and global data for signals (like central bank announcements or weather alerts) and adjusts hedges in real time. You don't need to watch the markets – we do it for you.
-                    </p>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-xl mb-2 font-inter">Easy & Secure</h4>
-                    <p className="text-white/70 leading-relaxed font-inter">
-                      No trading or crypto expertise is needed. Horizon's interface speaks plain language, and behind the scenes all trades use Kalshi's CFTC-regulated markets for compliance. Your funds move through on-chain contracts (non-custodial and transparent) so you always see where your money is.
-                    </p>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-xl mb-2 font-inter">Peace of Mind</h4>
-                    <p className="text-white/70 leading-relaxed font-inter">
-                      Know that you're protected against big surprises. Horizon turns "what-if" fears (What if winter fuel prices spike?) into automatic hedges, giving you confidence in the face of uncertainty.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Advanced Traders */}
-              <div>
-                <h3 className="font-space-grotesk text-2xl md:text-3xl font-bold mb-6 text-orange-400">
-                  For Advanced Traders / Portfolio Builders
-                </h3>
-                <div className="space-y-6">
-                  <div>
-                    <h4 className="font-semibold text-xl mb-2 font-inter">Event-Driven Trading</h4>
-                    <p className="text-white/70 leading-relaxed font-inter">
-                      Directly trade on macro events and geopolitical outcomes. Take positions on CPI prints, Fed rate changes, elections, weather disasters, commodity prices and more. This lets you hedge or speculate with precision.
-                    </p>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-xl mb-2 font-inter">Automated Strategy Execution</h4>
-                    <p className="text-white/70 leading-relaxed font-inter">
-                      Program your own rules and let our AI act as your trading assistant. Horizon links signals from machine learning models to auto-execution on Solana, using a high-speed "hybrid RFQ" system via DFlow/Jupiter. The result is fast, atomic trades that keep you ahead of moving markets.
-                    </p>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-xl mb-2 font-inter">Deep Liquidity & Speed</h4>
-                    <p className="text-white/70 leading-relaxed font-inter">
-                      By tapping Solana's ecosystem and Kalshi's new tokenized markets, Horizon offers tight spreads and instant settlement. You get the "deepest prediction market liquidity layer in the world" with millisecond finality, so even large hedge orders fill instantly.
-                    </p>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-xl mb-2 font-inter">Composable Portfolio Tools</h4>
-                    <p className="text-white/70 leading-relaxed font-inter">
-                      Treat event contracts like any other asset. Integrate hedges into your DeFi vaults or portfolios – for example, use them to offset stock risk or create leveraged baskets combining equities, futures, and event bets. Horizon also supports arbitrage and spread strategies between on-chain and off-chain prices.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* FAQ Section */}
         <section className="px-6 md:px-8 py-16 md:py-24 border-t border-white/10">
           <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="font-space-grotesk text-4xl md:text-5xl font-bold mb-4">
-                Still wondering how it works?
+            <div className="text-center mb-20">
+              {/* Frequently Asked Questions Button/Capsule */}
+              <div className="inline-flex items-center mb-12 px-5 py-2.5 bg-gray-900/60 backdrop-blur-sm border border-gray-800/80 rounded-full shadow-lg">
+                <span className="text-white/90 text-sm md:text-base font-medium tracking-wide">Frequently Asked Questions</span>
+              </div>
+              
+              {/* Main Heading */}
+              <h2 className="font-space-grotesk text-6xl md:text-7xl lg:text-8xl font-bold mb-8 text-white tracking-tight leading-none">
+                Trade like a <span className="font-great-vibes italic text-7xl md:text-8xl lg:text-9xl font-normal ml-2">pro</span>
               </h2>
-              <h3 className="font-space-grotesk text-3xl md:text-4xl font-bold mb-12">
-                FAQ
-              </h3>
+              
+              {/* Subtitle/Description */}
+              <p className="text-white/50 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed font-inter font-normal">
+                From predictions to profits — learn how Horizon makes hedging smooth, smart, and seriously powerful.
+              </p>
             </div>
 
             <div className="max-w-4xl mx-auto space-y-8">
               <FAQItem
-                question="How does this work?"
+                question="What is HorizonAI?"
                 answer={`Horizon's AI scans news and data (economic reports, social media, satellite weather feeds, etc.) to gauge risks like inflation jumps or storms. When a risk rises, it automatically buys or sells "Yes/No" shares on a prediction market corresponding to that event. For example, if groceries are going to get expensive, Horizon might buy a "Yes" share in an event like "CPI inflation > 4%" to offset your cost increase. All trading happens on Kalshi's markets, which are now tokenized on Solana via DFlow and Jupiter. In practice this means trades are executed on-chain in a single step (a hybrid RFQ system), giving you instant, transparent hedges against the predicted outcome.`}
-              />
+                defaultOpen={true}              />
               <FAQItem
                 question="Is it safe?"
                 answer={`Yes. Horizon uses Kalshi – the first CFTC-regulated prediction market – so every contract and payout is overseen by regulators. Trades settle on Solana's blockchain, which is public and non-custodial (no one can run away with your funds). In fact, Kalshi's tokenized markets are "non-custodial, instant, and crypto native", meaning each trade is governed by smart contracts you can audit. That said, prediction markets are speculative by nature, so we always advise setting sensible limits and understanding that hedges can reduce losses but not eliminate risk entirely.`}
@@ -309,48 +228,88 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Footer */}
-        <footer className="px-6 md:px-8 py-12 border-t border-white/10">
-          <div className="max-w-7xl mx-auto text-center">
-            <p className="text-white/60 font-inter">
-              © {new Date().getFullYear()} Horizon. All rights reserved.
+        {/* Waitlist CTA Section */}
+        <section className="px-6 md:px-8 py-24 md:py-32">
+          <div className="max-w-4xl mx-auto text-center">
+            {/* Main Heading */}
+            <h2 className="font-space-grotesk text-6xl md:text-7xl lg:text-8xl font-bold mb-10 text-white tracking-tight leading-none">
+              Ready to trade <span className="font-great-vibes italic text-7xl md:text-8xl lg:text-9xl font-normal ml-2">smarter?</span>
+            </h2>
+            
+            {/* Descriptive Text */}
+            <div className="space-y-3 mb-10">
+              <p className="text-white text-lg md:text-xl font-inter">
+                We're opening early access to a small group of testers.
+              </p>
+              <p className="text-white text-lg md:text-xl font-inter">
+                Experience how Horizon's AI-powered intelligence transforms every hedge.
+              </p>
+            </div>
+
+            {/* Join Waitlist Button */}
+            <div className="mb-6">
+              <a
+                href="https://forms.gle/k7uLeN46X1zUJWrCA"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 md:px-8 md:py-4 bg-gray-900/80 backdrop-blur-sm border border-gray-700 rounded-full text-white font-medium text-base md:text-lg hover:bg-gray-800/90 hover:border-gray-600 transition-all duration-300 group"
+              >
+                <span>Join Waitlist</span>
+                <svg
+                  className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M13 7l5 5m0 0l-5 5m5-5H6"
+                  />
+                </svg>
+              </a>
+            </div>
+
+            {/* Footer Text */}
+            <p className="text-white/50 text-sm md:text-base font-inter">
+              Get early access and future perks.
             </p>
           </div>
-        </footer>
+        </section>
       </div>
     </main>
   );
 }
 
-function FAQItem({ question, answer }: { question: string; answer: string }) {
-  const [isOpen, setIsOpen] = useState(false);
+function FAQItem({ question, answer, defaultOpen = false }: { question: string; answer: string; defaultOpen?: boolean }) {
+  const [isOpen, setIsOpen] = useState(defaultOpen);
 
   return (
-    <div className="border border-white/10 rounded-lg overflow-hidden bg-white/5 hover:bg-white/10 transition-colors duration-300">
+    <div className="border border-white/10 rounded-xl overflow-hidden bg-black/40 backdrop-blur-sm hover:border-white/20 hover:bg-black/60 transition-all duration-300 group">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full px-6 py-4 text-left flex justify-between items-center gap-4 group"
+        className="w-full px-6 py-5 text-left flex justify-between items-center gap-4"
       >
-        <span className="font-semibold text-lg md:text-xl font-inter">{question}</span>
-        <svg
-          className={`w-5 h-5 flex-shrink-0 transform transition-transform duration-300 ${
-            isOpen ? "rotate-180" : ""
-          }`}
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M19 9l-7 7-7-7"
-          />
-        </svg>
+        <span className="font-space-grotesk font-medium text-lg md:text-xl text-white">{question}</span>
+        <div className="flex-shrink-0 w-6 h-6 flex items-center justify-center">
+          <svg
+            className={`w-5 h-5 transform transition-transform duration-300 ${
+              isOpen ? "rotate-45" : ""
+            }`}
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={2.5}
+            viewBox="0 0 24 24"
+          >
+            <line x1="12" y1="5" x2="12" y2="19" stroke="currentColor" />
+            <line x1="5" y1="12" x2="19" y2="12" stroke="currentColor" />
+          </svg>
+        </div>
       </button>
       {isOpen && (
-        <div className="px-6 pb-4">
-          <p className="text-white/70 leading-relaxed font-inter">{answer}</p>
+        <div className="px-6 pb-5 border-t border-white/5">
+          <p className="text-white/60 leading-relaxed font-inter text-base mt-4">{answer}</p>
         </div>
       )}
     </div>
