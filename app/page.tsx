@@ -6,14 +6,26 @@ import { useState, useEffect } from "react";
 export default function Home() {
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
   const [scrollY, setScrollY] = useState(0);
+  const [windowWidth, setWindowWidth] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY);
     };
+    
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
 
+    // Set initial width
+    setWindowWidth(window.innerWidth);
+    
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   // Smooth animation curve (ease-in-out cubic)
@@ -23,10 +35,33 @@ export default function Home() {
 
   // Logo and button should converge to become adjacent in a blurred container
   // Logo moves from left toward center, button moves from right toward center
-  // Both converge to become adjacent (with small gap between them)
-  // Adjusted convergence distance to prevent overlap while staying adjacent
-  const logoTranslateX = easedProgress * 520; // Move right toward center (adjusted to prevent overlap)
-  const buttonTranslateX = -easedProgress * 520; // Move left toward center (adjusted to prevent overlap)
+  // Both converge with appropriate gap between them (not too close)
+  // Responsive convergence distance: calculate based on screen width for proper adjacency
+  const calculateConvergenceDistance = () => {
+    if (windowWidth === 0) return 520; // Default for SSR
+    if (windowWidth < 768) {
+      // Mobile: calculate distance based on actual screen width
+      // Logo starts at left-4 (16px), Button starts at right-4 (16px)
+      // Logo width: ~80px (w-20), Button width: ~130px (with padding and text)
+      // To make them adjacent: logo right edge meets button left edge with small gap
+      // Logo right edge initially: 16 + 80 = 96px
+      // Button left edge initially: screenWidth - 16 - 130 = screenWidth - 146px
+      // Gap between them: (screenWidth - 146) - 96 = screenWidth - 242px
+      // We want ~16px gap, so each needs to move: (gap - 16) / 2
+      const screenWidth = windowWidth;
+      const logoRightEdge = 16 + 80; // left-4 + logo width
+      const buttonLeftEdge = screenWidth - 16 - 130; // screenWidth - right-4 - button width
+      const currentGap = buttonLeftEdge - logoRightEdge;
+      const targetGap = 28; // Increased gap for better spacing (was 16px)
+      const distanceToMove = (currentGap - targetGap) / 2;
+      // Ensure minimum movement and reasonable maximum
+      return Math.max(60, Math.min(distanceToMove, 200));
+    }
+    return 520; // Desktop
+  };
+  const convergenceDistance = calculateConvergenceDistance();
+  const logoTranslateX = easedProgress * convergenceDistance; // Move right toward center
+  const buttonTranslateX = -easedProgress * convergenceDistance; // Move left toward center
   
   // Background container opacity increases as they converge
   const containerOpacity = easedProgress * 0.9;
@@ -63,18 +98,18 @@ export default function Home() {
         <div className="relative w-full h-full flex items-center justify-center pointer-events-none">
           {/* Blurred Background Container - Appears as elements converge */}
           <div
-            className="absolute left-1/2 -translate-x-1/2 rounded-full px-5 py-2.5 pointer-events-none transition-opacity duration-300"
+            className="absolute left-1/2 -translate-x-1/2 rounded-full px-4 py-2 md:px-5 md:py-2.5 pointer-events-none transition-opacity duration-300"
             style={{
               opacity: containerOpacity,
               backdropFilter: 'blur(12px)',
               backgroundColor: 'rgba(17, 24, 39, 0.6)', // gray-900 with transparency
               border: '1px solid rgba(75, 85, 99, 0.5)', // gray-600 border
               transform: `translateX(-50%)`,
-              minWidth: '320px',
+              minWidth: windowWidth > 0 && windowWidth < 768 ? '260px' : '320px',
             }}
           >
             {/* Invisible spacer to maintain container size when visible */}
-            <div className="w-[300px] h-12 md:h-14" />
+            <div className="w-[240px] md:w-[300px] h-12 md:h-14" />
           </div>
 
           {/* Logo - Starts at left, converges to center, becomes adjacent to button */}
@@ -133,7 +168,7 @@ export default function Home() {
       <section className="relative z-10 min-h-screen flex items-end px-6 md:px-8 pb-12 md:pb-16">
         <div className="w-full">
           <div className="max-w-3xl">
-            <h1 className="font-playfair text-6xl md:text-8xl lg:text-9xl font-bold italic mb-6 bg-gradient-to-r from-blue-400 via-orange-400 to-yellow-400 bg-clip-text text-transparent leading-[1.1] tracking-tight">
+            <h1 className="font-space-grotesk text-6xl md:text-8xl lg:text-9xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-orange-400 to-yellow-400 bg-clip-text text-transparent leading-[1.1] tracking-tight">
               Horizon
             </h1>
             <p className="font-playfair text-2xl md:text-3xl lg:text-4xl font-medium italic mb-4 text-white/90 leading-tight tracking-wide">
@@ -182,7 +217,7 @@ export default function Home() {
               
               {/* Main Heading */}
               <h2 className="font-space-grotesk text-6xl md:text-7xl lg:text-8xl font-bold mb-8 text-white tracking-tight leading-none">
-                Trade like a <span className="font-playfair italic font-semibold ml-2">pro</span>
+                Trade like a <span className="font-great-vibes italic text-7xl md:text-8xl lg:text-9xl font-normal ml-2">pro</span>
               </h2>
               
               {/* Subtitle/Description */}
@@ -233,7 +268,7 @@ export default function Home() {
           <div className="max-w-4xl mx-auto text-center">
             {/* Main Heading */}
             <h2 className="font-space-grotesk text-6xl md:text-7xl lg:text-8xl font-bold mb-10 text-white tracking-tight leading-none">
-              Ready to trade <span className="font-playfair italic font-semibold ml-2">smarter?</span>
+              Ready to trade <span className="font-great-vibes italic text-7xl md:text-8xl lg:text-9xl font-normal ml-2">smarter?</span>
             </h2>
             
             {/* Descriptive Text */}
