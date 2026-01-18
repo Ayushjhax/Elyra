@@ -133,7 +133,7 @@ export default function Home() {
       <section className="relative z-10 min-h-screen flex items-end px-6 md:px-8 pb-12 md:pb-16">
         <div className="w-full">
           <div className="max-w-3xl">
-            <h1 className="font-great-vibes text-5xl md:text-7xl lg:text-8xl mb-6 bg-gradient-to-r from-blue-400 via-orange-400 to-yellow-400 bg-clip-text text-transparent leading-[1] tracking-wider">
+            <h1 className="font-playfair text-6xl md:text-8xl lg:text-9xl font-bold italic mb-6 bg-gradient-to-r from-blue-400 via-orange-400 to-yellow-400 bg-clip-text text-transparent leading-[1.1] tracking-tight">
               Horizon
             </h1>
             <p className="font-playfair text-2xl md:text-3xl lg:text-4xl font-medium italic mb-4 text-white/90 leading-tight tracking-wide">
@@ -182,12 +182,12 @@ export default function Home() {
               
               {/* Main Heading */}
               <h2 className="font-space-grotesk text-6xl md:text-7xl lg:text-8xl font-bold mb-8 text-white tracking-tight leading-none">
-                Trade like a <span className="font-great-vibes italic text-7xl md:text-8xl lg:text-9xl font-normal ml-2">pro</span>
+                Trade like a <span className="font-playfair italic font-semibold ml-2">pro</span>
               </h2>
               
               {/* Subtitle/Description */}
-              <p className="text-white/50 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed font-inter font-normal">
-                From predictions to profits — learn how Horizon makes hedging smooth, smart, and seriously powerful.
+              <p className="text-white/60 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed font-inter font-light tracking-wide">
+                From predictions to profits — learn how <span className="text-white/80 font-medium">Horizon</span> makes hedging smooth, smart, and seriously powerful.
               </p>
             </div>
 
@@ -233,16 +233,16 @@ export default function Home() {
           <div className="max-w-4xl mx-auto text-center">
             {/* Main Heading */}
             <h2 className="font-space-grotesk text-6xl md:text-7xl lg:text-8xl font-bold mb-10 text-white tracking-tight leading-none">
-              Ready to trade <span className="font-great-vibes italic text-7xl md:text-8xl lg:text-9xl font-normal ml-2">smarter?</span>
+              Ready to trade <span className="font-playfair italic font-semibold ml-2">smarter?</span>
             </h2>
             
             {/* Descriptive Text */}
-            <div className="space-y-3 mb-10">
-              <p className="text-white text-lg md:text-xl font-inter">
+            <div className="space-y-4 mb-10">
+              <p className="text-white/70 text-lg md:text-xl font-inter font-light tracking-wide">
                 We're opening early access to a small group of testers.
               </p>
-              <p className="text-white text-lg md:text-xl font-inter">
-                Experience how Horizon's AI-powered intelligence transforms every hedge.
+              <p className="text-white/80 text-lg md:text-xl font-inter font-medium tracking-wide">
+                Experience how <span className="text-white font-semibold">Horizon</span>'s AI-powered intelligence transforms every hedge.
               </p>
             </div>
 
