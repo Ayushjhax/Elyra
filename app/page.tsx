@@ -16,25 +16,23 @@ export default function Home() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Calculate animation values based on scroll
-  const scrollThreshold = 400; // Pixels to scroll before nav disappears
-  const navOpacity = Math.max(0, 1 - scrollY / scrollThreshold);
-  const navVisible = scrollY < scrollThreshold;
-
   // Smooth animation curve (ease-in-out cubic)
   const easeInOutCubic = (t: number) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
   const scrollProgress = Math.min(scrollY / 300, 1); // Complete animation in 300px
   const easedProgress = easeInOutCubic(scrollProgress);
 
-  // Both elements should move down together and converge horizontally
-  // They should stay in the nav area (top portion) and come closer together
-  const navTranslateY = Math.min(scrollY * 0.5, 200); // Move down together as we scroll
+  // Logo and button should converge to become adjacent in a blurred container
+  // Logo moves from left toward center, button moves from right toward center
+  // Both converge to become adjacent (with small gap between them)
+  // Adjusted convergence distance to prevent overlap while staying adjacent
+  const logoTranslateX = easedProgress * 520; // Move right toward center (adjusted to prevent overlap)
+  const buttonTranslateX = -easedProgress * 520; // Move left toward center (adjusted to prevent overlap)
   
-  // Logo animation: starts at top-left, moves toward center on scroll (come closer)
-  const logoTranslateX = easedProgress * 350; // Move right toward center (smooth convergence)
+  // Background container opacity increases as they converge
+  const containerOpacity = easedProgress * 0.9;
   
-  // Button animation: starts at top-right, moves toward center on scroll (come closer)
-  const buttonTranslateX = -easedProgress * 350; // Move left toward center (smooth convergence)
+  // Nav should move down slightly when scrolling to add gap above
+  const navTranslateY = Math.min(scrollY * 0.3, 40); // Move down up to 40px for gap
 
   return (
     <main className="relative min-h-screen w-full overflow-x-hidden">
@@ -54,21 +52,40 @@ export default function Home() {
         <div className="absolute inset-0 bg-black/40" />
       </div>
 
-      {/* Navigation - Logo and Button with scroll animation */}
-      {navVisible && (
-        <nav
-          className="fixed top-0 left-0 right-0 z-50 pointer-events-none"
-          style={{ opacity: navOpacity }}
-        >
-          {/* Logo - Top Left Corner */}
+      {/* Navigation Bar - Always visible, logo and button converge into blurred container */}
+      <nav 
+        className="fixed top-0 left-0 right-0 z-50 h-14 md:h-16 px-4 md:px-8 pointer-events-none"
+        style={{
+          transform: `translateY(${navTranslateY}px)`,
+          transition: 'transform 0.1s ease-out',
+        }}
+      >
+        <div className="relative w-full h-full flex items-center justify-center pointer-events-none">
+          {/* Blurred Background Container - Appears as elements converge */}
           <div
-            className="absolute top-4 left-4 pointer-events-auto"
+            className="absolute left-1/2 -translate-x-1/2 rounded-full px-5 py-2.5 pointer-events-none transition-opacity duration-300"
             style={{
-              transform: `translate(${logoTranslateX}px, ${navTranslateY}px)`,
+              opacity: containerOpacity,
+              backdropFilter: 'blur(12px)',
+              backgroundColor: 'rgba(17, 24, 39, 0.6)', // gray-900 with transparency
+              border: '1px solid rgba(75, 85, 99, 0.5)', // gray-600 border
+              transform: `translateX(-50%)`,
+              minWidth: '320px',
+            }}
+          >
+            {/* Invisible spacer to maintain container size when visible */}
+            <div className="w-[300px] h-12 md:h-14" />
+          </div>
+
+          {/* Logo - Starts at left, converges to center, becomes adjacent to button */}
+          <div
+            className="absolute left-4 md:left-6 pointer-events-auto z-10"
+            style={{
+              transform: `translateX(${logoTranslateX}px)`,
               transition: 'transform 0.1s ease-out',
             }}
           >
-            <div className="relative w-24 h-16 md:w-32 md:h-20 flex items-center justify-center">
+            <div className="relative w-20 h-14 md:w-28 md:h-18 flex items-center justify-center">
               <Image
                 src="/logo.png"
                 alt="Horizon Logo"
@@ -79,11 +96,11 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Join Waitlist Button - Top Right Corner */}
+          {/* Join Waitlist Button - Starts at right, converges to center, becomes adjacent to logo */}
           <div
-            className="absolute top-4 right-4 pointer-events-auto"
+            className="absolute right-4 md:right-6 pointer-events-auto z-10"
             style={{
-              transform: `translate(${buttonTranslateX}px, ${navTranslateY}px)`,
+              transform: `translateX(${buttonTranslateX}px)`,
               transition: 'transform 0.1s ease-out',
             }}
           >
@@ -91,11 +108,11 @@ export default function Home() {
               href="https://forms.gle/k7uLeN46X1zUJWrCA"
               target="_blank"
               rel="noopener noreferrer"
-              className="group px-4 py-2 md:px-6 md:py-3 bg-gray-900/80 backdrop-blur-sm border border-gray-700 rounded-full text-white font-medium text-xs md:text-sm hover:bg-gray-800/90 hover:border-gray-600 transition-all duration-300 flex items-center gap-2 h-10 md:h-12"
+              className="group px-4 py-2 md:px-5 md:py-2.5 bg-gray-900/80 backdrop-blur-sm border border-gray-700 rounded-full text-white font-medium text-sm hover:bg-gray-800/90 hover:border-gray-600 transition-all duration-300 flex items-center gap-2 h-11 md:h-12 whitespace-nowrap"
             >
               <span>Join Waitlist</span>
               <svg
-                className="w-3 h-3 md:w-4 md:h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300"
+                className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -109,8 +126,8 @@ export default function Home() {
               </svg>
             </a>
           </div>
-        </nav>
-      )}
+        </div>
+      </nav>
 
       {/* Hero Section */}
       <section className="relative z-10 min-h-screen flex items-center px-6 md:px-8 py-20">
