@@ -168,7 +168,7 @@ export default function Home() {
       <section className="relative z-10 min-h-screen flex items-end px-6 md:px-8 pb-12 md:pb-16">
         <div className="w-full">
           <div className="max-w-3xl">
-            <h1 className="font-space-grotesk text-6xl md:text-8xl lg:text-9xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-orange-400 to-yellow-400 bg-clip-text text-transparent leading-[1.1] tracking-tight">
+            <h1 className="font-allura text-6xl md:text-8xl lg:text-9xl mb-6 bg-gradient-to-r from-blue-400 via-orange-400 to-yellow-400 bg-clip-text text-transparent leading-[1.1] tracking-wide">
               Horizon
             </h1>
             <p className="font-playfair text-2xl md:text-3xl lg:text-4xl font-medium italic mb-4 text-white/90 leading-tight tracking-wide">

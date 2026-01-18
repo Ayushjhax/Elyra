@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk, Poppins, Great_Vibes, Playfair_Display } from "next/font/google";
+import { Inter, Space_Grotesk, Poppins, Great_Vibes, Playfair_Display, Allura } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({ 
@@ -30,6 +30,12 @@ const playfairDisplay = Playfair_Display({
   variable: "--font-playfair",
 });
 
+const allura = Allura({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-allura",
+});
+
 export const metadata: Metadata = {
   title: "Built for the next era of trading. ",
   description: "AI-powered forecasting and hedging of everyday uncertainties via Kalshi markets.",
@@ -42,7 +48,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${spaceGrotesk.variable} ${poppins.variable} ${greatVibes.variable} ${playfairDisplay.variable} font-sans antialiased`}>
+      <body className={`${inter.variable} ${spaceGrotesk.variable} ${poppins.variable} ${greatVibes.variable} ${playfairDisplay.variable} ${allura.variable} font-sans antialiased`}>
         {children}
       </body>
     </html>

@@ -18,6 +18,7 @@ const config: Config = {
         poppins: ["var(--font-poppins)", "sans-serif"],
         "great-vibes": ["var(--font-great-vibes)", "cursive"],
         playfair: ["var(--font-playfair)", "serif"],
+        allura: ["var(--font-allura)", "cursive"],
       },
     },
   },
