@@ -62,8 +62,6 @@ export default function Home() {
   
   // Background container opacity increases as they converge
   const containerOpacity = easedProgress * 0.9;
-  const xButtonOpacity = Math.max(0, 1 - easedProgress * 3);
-  
   // Nav should move down slightly when scrolling to add gap above
   const navTranslateY = Math.min(scrollY * 0.2, 24); // Move down up to 24px for compact feel
 
@@ -124,32 +122,6 @@ export default function Home() {
                 priority
               />
             </div>
-          </div>
-
-          {/* X Button - Stays fixed; does not join convergence/downshift animation */}
-          <div
-            className="absolute pointer-events-auto z-10 transition-opacity duration-200"
-            style={{
-              right: windowWidth > 0 && windowWidth < 768 ? 172 : 206,
-              opacity: xButtonOpacity,
-            }}
-          >
-            <a
-              href="https://x.com/getelyra"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Visit Elyra on X"
-              className="p-0 bg-gray-900/80 backdrop-blur-sm border border-gray-700 rounded-full hover:bg-gray-800/90 hover:border-gray-600 transition-all duration-300 flex items-center justify-center h-11 w-11 md:h-12 md:w-12 overflow-hidden"
-            >
-              <span className="relative w-full h-full">
-                <Image
-                  src="/x.png"
-                  alt="X logo"
-                  fill
-                  className="object-cover"
-                />
-              </span>
-            </a>
           </div>
 
           {/* Join Waitlist Button - Starts at right, converges to center, becomes adjacent to logo */}
@@ -243,7 +215,7 @@ export default function Home() {
               
               {/* Main Heading */}
               <h2 className="font-space-grotesk text-6xl md:text-7xl lg:text-8xl font-bold mb-8 text-white tracking-tight leading-none">
-                Trade like a <span className="font-great-vibes italic text-7xl md:text-8xl lg:text-9xl font-normal ml-2">pro</span>
+              Command your capital swarm <span className="font-great-vibes italic text-7xl md:text-8xl lg:text-9xl font-normal ml-2">Swarm</span>
               </h2>
               
               {/* Subtitle/Description */}
@@ -302,7 +274,7 @@ By removing human emotional volatility and execution gaps, we maximize the "Freq
           <div className="max-w-4xl mx-auto text-center">
             {/* Main Heading */}
             <h2 className="font-space-grotesk text-6xl md:text-7xl lg:text-8xl font-bold mb-10 text-white tracking-tight leading-none">
-              Ready to trade <span className="font-great-vibes italic text-7xl md:text-8xl lg:text-9xl font-normal ml-2">smarter?</span>
+              Ready for agentic <span className="font-great-vibes italic text-7xl md:text-8xl lg:text-9xl font-normal ml-2">precision?</span>
             </h2>
             
             {/* Descriptive Text */}
