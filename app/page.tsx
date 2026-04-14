@@ -113,12 +113,12 @@ export default function Home() {
               transition: 'transform 0.1s ease-out',
             }}
           >
-            <div className="relative w-20 h-14 md:w-28 md:h-18 flex items-center justify-center">
+            <div className="relative w-12 h-12 md:w-14 md:h-14 rounded-full overflow-hidden border border-white/20 bg-black/35 shadow-[0_0_24px_rgba(255,255,255,0.12)] flex items-center justify-center backdrop-blur-sm">
               <Image
                 src="/logo.png"
                 alt="Elyra Logo"
                 fill
-                className="object-contain"
+                className="object-cover scale-[0.9]"
                 priority
               />
             </div>
@@ -215,11 +215,11 @@ export default function Home() {
               
               {/* Main Heading */}
               <h2 className="font-space-grotesk text-6xl md:text-7xl lg:text-8xl font-bold mb-8 text-white tracking-tight leading-none">
-              Command your capital swarm <span className="font-great-vibes italic text-7xl md:text-8xl lg:text-9xl font-normal ml-2">Swarm</span>
+              Command your capital <span className="font-great-vibes italic text-7xl md:text-8xl lg:text-9xl font-normal ml-2">Swarm</span>
               </h2>
               
               {/* Subtitle/Description */}
-              <p className="text-white/60 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed font-inter font-light tracking-wide">
+              <p className="font-playfair text-white/60 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed font-light tracking-wide">
               The autonomous stack for high-frequency financial sovereignty — learn how <span className="text-white/80 font-medium">Elyra</span> makes Trading smooth, smart, and seriously powerful.
               </p>
             </div>
@@ -279,10 +279,10 @@ By removing human emotional volatility and execution gaps, we maximize the "Freq
             
             {/* Descriptive Text */}
             <div className="space-y-4 mb-10">
-              <p className="text-white/70 text-lg md:text-xl font-inter font-light tracking-wide">
+              <p className="font-playfair text-white/70 text-lg md:text-xl font-light tracking-wide">
                 We're opening early access to a small group of testers.
               </p>
-              <p className="text-white/80 text-lg md:text-xl font-inter font-medium tracking-wide">
+              <p className="font-playfair text-white/80 text-lg md:text-xl font-medium tracking-wide">
                 Experience how <span className="text-white font-semibold">Elyra</span>'s AI-powered intelligence transforms every hedge.
               </p>
             </div>
@@ -313,7 +313,7 @@ By removing human emotional volatility and execution gaps, we maximize the "Freq
             </div>
 
             {/* Footer Text */}
-            <p className="text-white/50 text-sm md:text-base font-inter">
+            <p className="font-playfair text-white/50 text-sm md:text-base">
               Get early access and future perks.
             </p>
           </div>
@@ -332,7 +332,7 @@ function FAQItem({ question, answer, defaultOpen = false }: { question: string; 
         onClick={() => setIsOpen(!isOpen)}
         className="w-full px-6 py-5 text-left flex justify-between items-center gap-4"
       >
-        <span className="font-space-grotesk font-medium text-lg md:text-xl text-white">{question}</span>
+        <span className="font-playfair font-medium text-lg md:text-xl text-white">{question}</span>
         <div className="flex-shrink-0 w-6 h-6 flex items-center justify-center">
           <svg
             className={`w-5 h-5 transform transition-transform duration-300 ${
@@ -350,7 +350,7 @@ function FAQItem({ question, answer, defaultOpen = false }: { question: string; 
       </button>
       {isOpen && (
         <div className="px-6 pb-5 border-t border-white/5">
-          <p className="text-white/60 leading-relaxed font-inter text-base mt-4">{answer}</p>
+          <p className="font-playfair text-white/60 leading-relaxed text-base mt-4">{answer}</p>
         </div>
       )}
     </div>
