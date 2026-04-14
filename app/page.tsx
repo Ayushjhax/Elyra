@@ -33,31 +33,24 @@ export default function Home() {
   const scrollProgress = Math.min(scrollY / 300, 1); // Complete animation in 300px
   const easedProgress = easeInOutCubic(scrollProgress);
 
-  // Logo and button should converge to become adjacent in a blurred container
-  // Logo moves from left toward center, button moves from right toward center
-  // Both converge with appropriate gap between them (not too close)
-  // Responsive convergence distance: calculate based on screen width for proper adjacency
+  // Logo and waitlist should converge to become adjacent in a blurred container.
+  // Keep the X button fixed; only logo + waitlist participate in convergence.
   const calculateConvergenceDistance = () => {
-    if (windowWidth === 0) return 520; // Default for SSR
-    if (windowWidth < 768) {
-      // Mobile: calculate distance based on actual screen width
-      // Logo starts at left-4 (16px), Button starts at right-4 (16px)
-      // Logo width: ~80px (w-20), Button width: ~130px (with padding and text)
-      // To make them adjacent: logo right edge meets button left edge with small gap
-      // Logo right edge initially: 16 + 80 = 96px
-      // Button left edge initially: screenWidth - 16 - 130 = screenWidth - 146px
-      // Gap between them: (screenWidth - 146) - 96 = screenWidth - 242px
-      // We want ~16px gap, so each needs to move: (gap - 16) / 2
-      const screenWidth = windowWidth;
-      const logoRightEdge = 16 + 80; // left-4 + logo width
-      const buttonLeftEdge = screenWidth - 16 - 130; // screenWidth - right-4 - button width
-      const currentGap = buttonLeftEdge - logoRightEdge;
-      const targetGap = 28; // Increased gap for better spacing (was 16px)
-      const distanceToMove = (currentGap - targetGap) / 2;
-      // Ensure minimum movement and reasonable maximum
-      return Math.max(60, Math.min(distanceToMove, 200));
-    }
-    return 520; // Desktop
+    if (windowWidth === 0) return 0;
+
+    const isMobile = windowWidth < 768;
+    const logoLeft = isMobile ? 16 : 24; // left-4 / md:left-6
+    const logoWidth = isMobile ? 80 : 112; // w-20 / md:w-28
+    const waitlistWidth = isMobile ? 148 : 170;
+    const waitlistRight = isMobile ? 16 : 24; // right-4 / md:right-6
+    const targetGap = isMobile ? 28 : 40;
+
+    const logoRightEdge = logoLeft + logoWidth;
+    const waitlistLeftEdge = windowWidth - waitlistRight - waitlistWidth;
+    const currentGap = waitlistLeftEdge - logoRightEdge;
+    const distanceToMove = (currentGap - targetGap) / 2;
+
+    return Math.max(0, distanceToMove);
   };
   const convergenceDistance = calculateConvergenceDistance();
   const logoTranslateX = easedProgress * convergenceDistance; // Move right toward center
@@ -65,9 +58,10 @@ export default function Home() {
   
   // Background container opacity increases as they converge
   const containerOpacity = easedProgress * 0.9;
+  const xButtonOpacity = Math.max(0, 1 - easedProgress * 3);
   
   // Nav should move down slightly when scrolling to add gap above
-  const navTranslateY = Math.min(scrollY * 0.3, 40); // Move down up to 40px for gap
+  const navTranslateY = Math.min(scrollY * 0.2, 24); // Move down up to 24px for compact feel
 
   return (
     <main className="relative min-h-screen w-full overflow-x-hidden">
@@ -88,42 +82,39 @@ export default function Home() {
       </div>
 
       {/* Navigation Bar - Always visible, logo and button converge into blurred container */}
-      <nav 
+      <nav
         className="fixed top-0 left-0 right-0 z-50 h-14 md:h-16 px-4 md:px-8 pointer-events-none"
-        style={{
-          transform: `translateY(${navTranslateY}px)`,
-          transition: 'transform 0.1s ease-out',
-        }}
       >
         <div className="relative w-full h-full flex items-center justify-center pointer-events-none">
           {/* Blurred Background Container - Appears as elements converge */}
           <div
-            className="absolute left-1/2 -translate-x-1/2 rounded-full px-4 py-2 md:px-5 md:py-2.5 pointer-events-none transition-opacity duration-300"
+            className="absolute left-1/2 -translate-x-1/2 rounded-full px-3 py-1.5 md:px-4 md:py-2 pointer-events-none transition-opacity duration-300"
             style={{
               opacity: containerOpacity,
               backdropFilter: 'blur(12px)',
               backgroundColor: 'rgba(17, 24, 39, 0.6)', // gray-900 with transparency
               border: '1px solid rgba(75, 85, 99, 0.5)', // gray-600 border
-              transform: `translateX(-50%)`,
-              minWidth: windowWidth > 0 && windowWidth < 768 ? '260px' : '320px',
+              transform: `translate(-50%, ${navTranslateY}px)`,
+              minWidth: windowWidth > 0 && windowWidth < 768 ? '210px' : '280px',
             }}
           >
-            {/* Invisible spacer to maintain container size when visible */}
-            <div className="w-[240px] md:w-[300px] h-12 md:h-14" />
+            {/* Invisible spacer to maintain container size 
+            when visible */}
+            <div className="w-[190px] md:w-[260px] h-10 md:h-11" />
           </div>
 
           {/* Logo - Starts at left, converges to center, becomes adjacent to button */}
           <div
             className="absolute left-4 md:left-6 pointer-events-auto z-10"
             style={{
-              transform: `translateX(${logoTranslateX}px)`,
+              transform: `translate(${logoTranslateX}px, ${navTranslateY}px)`,
               transition: 'transform 0.1s ease-out',
             }}
           >
             <div className="relative w-20 h-14 md:w-28 md:h-18 flex items-center justify-center">
               <Image
                 src="/logo.png"
-                alt="Horizon Logo"
+                alt="Elyra Logo"
                 fill
                 className="object-contain"
                 priority
@@ -131,11 +122,37 @@ export default function Home() {
             </div>
           </div>
 
+          {/* X Button - Stays fixed; does not join convergence/downshift animation */}
+          <div
+            className="absolute pointer-events-auto z-10 transition-opacity duration-200"
+            style={{
+              right: windowWidth > 0 && windowWidth < 768 ? 172 : 206,
+              opacity: xButtonOpacity,
+            }}
+          >
+            <a
+              href="https://x.com/getelyra"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Visit Elyra on X"
+              className="p-0 bg-gray-900/80 backdrop-blur-sm border border-gray-700 rounded-full hover:bg-gray-800/90 hover:border-gray-600 transition-all duration-300 flex items-center justify-center h-11 w-11 md:h-12 md:w-12 overflow-hidden"
+            >
+              <span className="relative w-full h-full">
+                <Image
+                  src="/x.png"
+                  alt="X logo"
+                  fill
+                  className="object-cover"
+                />
+              </span>
+            </a>
+          </div>
+
           {/* Join Waitlist Button - Starts at right, converges to center, becomes adjacent to logo */}
           <div
             className="absolute right-4 md:right-6 pointer-events-auto z-10"
             style={{
-              transform: `translateX(${buttonTranslateX}px)`,
+              transform: `translate(${buttonTranslateX}px, ${navTranslateY}px)`,
               transition: 'transform 0.1s ease-out',
             }}
           >
@@ -172,10 +189,10 @@ export default function Home() {
               Pretzl
             </h1>
             <p className="font-playfair text-2xl md:text-3xl lg:text-4xl font-medium italic mb-4 text-white/90 leading-tight tracking-wide">
-            Built for the next era of trading. 
+            Built for the next era of trading
             </p>
             <p className="font-playfair text-lg md:text-xl lg:text-2xl text-white/70 max-w-2xl leading-relaxed font-light italic tracking-normal mb-8">
-              A Multi-Agentic sovereign hedge fund dismantling the Great Extraction.
+              A Multi-Agentic sovereign hedge fund dismantling the Great Extraction
             </p>
             
             {/* Join Waitlist Button - Below Hero Text */}
@@ -222,7 +239,7 @@ export default function Home() {
               
               {/* Subtitle/Description */}
               <p className="text-white/60 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed font-inter font-light tracking-wide">
-                From predictions to profits — learn how <span className="text-white/80 font-medium">Horizon</span> makes hedging smooth, smart, and seriously powerful.
+              The autonomous stack for high-frequency financial sovereignty — learn how <span className="text-white/80 font-medium">Elyra</span> makes Trading smooth, smart, and seriously powerful.
               </p>
             </div>
 
@@ -285,7 +302,7 @@ By removing human emotional volatility and execution gaps, we maximize the "Freq
                 We're opening early access to a small group of testers.
               </p>
               <p className="text-white/80 text-lg md:text-xl font-inter font-medium tracking-wide">
-                Experience how <span className="text-white font-semibold">Horizon</span>'s AI-powered intelligence transforms every hedge.
+                Experience how <span className="text-white font-semibold">Elyra</span>'s AI-powered intelligence transforms every hedge.
               </p>
             </div>
 
