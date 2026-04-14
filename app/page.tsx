@@ -2,6 +2,10 @@
 
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import ShadowMapSection from "./components/ShadowMapSection";
+import SovereignEngineSection from "./components/SovereignEngineSection";
+import ReturnEquationSection from "./components/ReturnEquationSection";
+import LiveTerminalSection from "./components/LiveTerminalSection";
 
 export default function Home() {
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
@@ -160,7 +164,7 @@ export default function Home() {
               href="https://forms.gle/k7uLeN46X1zUJWrCA"
               target="_blank"
               rel="noopener noreferrer"
-              className="group px-4 py-2 md:px-5 md:py-2.5 bg-gray-900/80 backdrop-blur-sm border border-gray-700 rounded-full text-white font-medium text-sm hover:bg-gray-800/90 hover:border-gray-600 transition-all duration-300 flex items-center gap-2 h-11 md:h-12 whitespace-nowrap"
+              className="waitlist-hardware group px-4 py-2 md:px-5 md:py-2.5 rounded-full text-white font-medium text-sm transition-all duration-300 flex items-center gap-2 h-11 md:h-12 whitespace-nowrap"
             >
               <span>Join Waitlist</span>
               <svg
@@ -185,14 +189,14 @@ export default function Home() {
       <section className="relative z-10 min-h-screen flex items-end px-6 md:px-8 pb-12 md:pb-16">
         <div className="w-full">
           <div className="max-w-3xl">
-            <h1 className="font-allura text-6xl md:text-8xl lg:text-9xl mb-6 bg-gradient-to-r from-blue-400 via-orange-400 to-yellow-400 bg-clip-text text-transparent leading-[1.1] tracking-wide">
-              Pretzl
+            <h1 className="magic-elyra font-playball text-6xl md:text-8xl lg:text-9xl mb-6 leading-[0.98] tracking-tight">
+              ELYRA
             </h1>
             <p className="font-playfair text-2xl md:text-3xl lg:text-4xl font-medium italic mb-4 text-white/90 leading-tight tracking-wide">
             Built for the next era of trading
             </p>
             <p className="font-playfair text-lg md:text-xl lg:text-2xl text-white/70 max-w-2xl leading-relaxed font-light italic tracking-normal mb-8">
-              A Multi-Agentic sovereign hedge fund dismantling the Great Extraction
+              A Multi-Agentic sovereign hedge fund
             </p>
             
             {/* Join Waitlist Button - Below Hero Text */}
@@ -200,7 +204,7 @@ export default function Home() {
               href="https://forms.gle/k7uLeN46X1zUJWrCA"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 md:px-8 md:py-4 bg-gray-900/80 backdrop-blur-sm border border-gray-700 rounded-full text-white font-medium text-base md:text-lg hover:bg-gray-800/90 hover:border-gray-600 transition-all duration-300 group"
+              className="waitlist-hardware inline-flex items-center gap-2 px-6 py-3 md:px-8 md:py-4 rounded-full text-white font-medium text-base md:text-lg transition-all duration-300 group"
             >
               <span>Join Waitlist</span>
               <svg
@@ -223,6 +227,11 @@ export default function Home() {
 
       {/* Content Section */}
       <div className="relative z-10 bg-black/95 backdrop-blur-sm">
+        <ShadowMapSection />
+        <SovereignEngineSection />
+        <ReturnEquationSection />
+        <LiveTerminalSection />
+
         {/* FAQ Section */}
         <section className="px-6 md:px-8 py-16 md:py-24 border-t border-white/10">
           <div className="max-w-7xl mx-auto">
@@ -306,15 +315,15 @@ By removing human emotional volatility and execution gaps, we maximize the "Freq
               </p>
             </div>
 
-            {/* Join Waitlist Button */}
+            {/* Latest Article Button */}
             <div className="mb-6">
               <a
-                href="https://forms.gle/k7uLeN46X1zUJWrCA"
+                href="https://medium.com/@ayushkmrjha/how-personal-ai-trading-agents-will-shatter-human-limits-and-redefine-alpha-in-the-agentic-economy-da49d8a22929"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 md:px-8 md:py-4 bg-gray-900/80 backdrop-blur-sm border border-gray-700 rounded-full text-white font-medium text-base md:text-lg hover:bg-gray-800/90 hover:border-gray-600 transition-all duration-300 group"
+                className="waitlist-hardware inline-flex items-center gap-2 px-6 py-3 md:px-8 md:py-4 rounded-full text-white font-medium text-base md:text-lg transition-all duration-300 group"
               >
-                <span>Join Waitlist</span>
+                <span>Read the latest Article</span>
                 <svg
                   className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300"
                   fill="none"
@@ -346,7 +355,7 @@ function FAQItem({ question, answer, defaultOpen = false }: { question: string; 
   const [isOpen, setIsOpen] = useState(defaultOpen);
 
   return (
-    <div className="border border-white/10 rounded-xl overflow-hidden bg-black/40 backdrop-blur-sm hover:border-white/20 hover:bg-black/60 transition-all duration-300 group">
+    <div className="glass-card rounded-xl overflow-hidden hover:border-white/20 hover:bg-black/60 transition-all duration-300 group">
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="w-full px-6 py-5 text-left flex justify-between items-center gap-4"
